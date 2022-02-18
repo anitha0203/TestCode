@@ -7,6 +7,7 @@ import { UserService } from '../user.service';
   styleUrls: ['./forecast.component.css']
 })
 export class ForecastComponent implements OnInit {
+  zcode1: any;
 
   ngOnInit(): void {
     this.getData();
@@ -26,9 +27,10 @@ month=["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec
   constructor(private service: UserService) {}
 
   getData() {
-    
-    let zcode1 = localStorage.getItem('Code ');
-    console.log("    jhdvhfj   zocde" + zcode1)
+    let zcode2 = JSON.parse(localStorage.getItem('user') || '{}');
+    let zcode1 = parseInt(zcode2[0])
+    console.log("    jhdvhfj   zocde " + zcode1)
+
     this.service.getData(this.url2+zcode1+'&appid=5a4b2d457ecbef9eb2a71e480b947604').subscribe((res) => {
       this.data = res;
       this.ccond1 = this.data.list[0].weather[0].main;
